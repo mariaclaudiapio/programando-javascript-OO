@@ -1,29 +1,42 @@
 class Cliente {
     nome;
     cpf;
+}
+
+class ContaCorrente {
     agencia;
-    saldo;
+    // #saldo = 0; (ainda é só uma proposta)
+    _saldo = 0;
+
+    sacar(valor) {
+        if(this._saldo >= valor) {
+            this._saldo -= valor;
+            return valor; // o return para a execução do método
+        }else {
+            console.log("Você não tem saldo suficiente para essa transação.")
+        }
+    }
+
+    depositar(valor) {
+        if(valor <= 0) return;
+        this._saldo += valor; 
+    }
 }
 
 const cliente1 = new Cliente();
-const cliente2 = new Cliente();
-const cliente3 = new Cliente();
-
 cliente1.nome = "Ricardo";
 cliente1.cpf = 12345678900;
-cliente1.agencia = 1001;
-cliente1.saldo = 0;
 
+const cliente2 = new Cliente();
 cliente2.nome = "Alice";
 cliente2.cpf = 12345678901;
-cliente2.agencia = 1001;
-cliente2.saldo = 0;
 
-cliente3.nome = "Maria";
-cliente3.cpf = 12345678902;
-cliente3.agencia = 1001;
-cliente3.saldo = 0;
+const contaCorrenteRicardo = new ContaCorrente();
+contaCorrenteRicardo.agencia = 1001;
 
-console.log(cliente1);
-console.log(cliente2);
-console.log(cliente3);
+contaCorrenteRicardo.depositar(300);
+const valorSacado = contaCorrenteRicardo.sacar(50);
+console.log(valorSacado);
+
+console.log(contaCorrenteRicardo);
+
